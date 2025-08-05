@@ -1,6 +1,6 @@
 module github.com/strangelove-ventures/tokenfactory
 
-go 1.23.11
+go 1.24.5
 
 replace (
 	// Force compatible collections version
@@ -12,7 +12,7 @@ replace (
 
 require (
 	cosmossdk.io/api v0.9.2
-	cosmossdk.io/client/v2 v2.0.0-beta.3
+	cosmossdk.io/client/v2 v2.0.0-beta.7
 	cosmossdk.io/core v0.11.3
 	cosmossdk.io/errors v1.0.2
 	cosmossdk.io/log v1.6.0
@@ -43,7 +43,7 @@ require (
 	github.com/spf13/pflag v1.0.7
 	github.com/spf13/viper v1.20.1
 	github.com/stretchr/testify v1.10.0
-	google.golang.org/genproto/googleapis/api v0.0.0-20250528174236-200df99c418a
+	google.golang.org/genproto/googleapis/api v0.0.0-20250603155806-513f23925822
 	google.golang.org/grpc v1.72.2
 )
 

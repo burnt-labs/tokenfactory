@@ -1,6 +1,6 @@
 module github.com/strangelove-ventures/tokenfactory/interchaintest
 
-go 1.23.11
+go 1.24.5
 
 replace (
 	cosmossdk.io/core v0.12.0 => cosmossdk.io/core v0.11.0 // proper SDK v50 version
@@ -9,14 +9,14 @@ replace (
 	github.com/ChainSafe/go-schnorrkel/1 => github.com/ChainSafe/go-schnorrkel v1.0.0
 	github.com/btcsuite/btcd/btcec/v2 => github.com/btcsuite/btcd/btcec/v2 v2.3.3
 	github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
-	github.com/strangelove-ventures/interchaintest/v10 v10.0.0 => ../../interchaintest/
+	github.com/strangelove-ventures/interchaintest/v10 v10.0.0-wasmvm3 => github.com/burnt-labs/interchaintest/v10 v10.0.0-wasmvm3
 	github.com/strangelove-ventures/tokenfactory => ../
 )
 
 require (
 	cosmossdk.io/math v1.5.3
 	github.com/cosmos/cosmos-sdk v0.53.4
-	github.com/strangelove-ventures/interchaintest/v10 v10.0.0
+	github.com/strangelove-ventures/interchaintest/v10 v10.0.0-wasmvm3
 	github.com/strangelove-ventures/tokenfactory v0.0.0-00010101000000-000000000000
 	github.com/stretchr/testify v1.10.0
 	go.uber.org/zap v1.27.0
@@ -65,6 +65,7 @@ require (
 	github.com/bytedance/sonic v1.13.2 // indirect
 	github.com/bytedance/sonic/loader v0.2.4 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
+	github.com/cenkalti/backoff/v5 v5.0.2 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/chzyer/readline v1.5.1 // indirect
 	github.com/cloudwego/base64x v0.1.5 // indirect
@@ -80,6 +81,7 @@ require (
 	github.com/cometbft/cometbft-db v0.14.1 // indirect
 	github.com/consensys/bavard v0.1.27 // indirect
 	github.com/consensys/gnark-crypto v0.16.0 // indirect
+	github.com/containerd/log v0.1.0 // indirect
 	github.com/cosmos/btcutil v1.0.5 // indirect
 	github.com/cosmos/cosmos-db v1.1.3 // indirect
 	github.com/cosmos/cosmos-proto v1.0.0-beta.5 // indirect
@@ -145,6 +147,7 @@ require (
 	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0 // indirect
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.1 // indirect
 	github.com/gsterjov/go-libsecret v0.0.0-20161001094733-a6f4afe4910c // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-getter v1.7.8 // indirect
@@ -180,7 +183,6 @@ require (
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
 	github.com/mmcloughlin/addchain v0.4.0 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
-	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/mtibben/percent v0.2.1 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect
@@ -236,11 +238,12 @@ require (
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.58.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.59.0 // indirect
 	go.opentelemetry.io/otel v1.37.0 // indirect
-	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.37.0 // indirect
+	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.37.0 // indirect
 	go.opentelemetry.io/otel/metric v1.37.0 // indirect
 	go.opentelemetry.io/otel/sdk v1.37.0 // indirect
 	go.opentelemetry.io/otel/sdk/metric v1.37.0 // indirect
 	go.opentelemetry.io/otel/trace v1.37.0 // indirect
+	go.opentelemetry.io/proto/otlp v1.7.0 // indirect
 	go.uber.org/mock v0.5.2 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.2 // indirect
