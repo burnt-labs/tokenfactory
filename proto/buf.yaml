@@ -1,6 +1,7 @@
 version: v1
+name: buf.build/burnt-labs/tokenfactory
 deps:
-  - buf.build/cosmos/cosmos-sdk:v0.50.3 # pin the Cosmos SDK version
+  - buf.build/cosmos/cosmos-sdk # pin the Cosmos SDK version
   - buf.build/cosmos/cosmos-proto
   - buf.build/cosmos/gogo-proto
   - buf.build/googleapis/googleapis
