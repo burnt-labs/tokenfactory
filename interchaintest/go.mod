@@ -21,8 +21,6 @@ require (
 	go.uber.org/zap v1.27.0
 )
 
-require github.com/moby/sys/atomicwriter v0.1.0 // indirect
-
 require (
 	cel.dev/expr v0.25.0 // indirect
 	cloud.google.com/go v0.123.0 // indirect
@@ -48,7 +46,7 @@ require (
 	github.com/99designs/go-keychain v0.0.0-20191008050251-8e49817e8af4 // indirect
 	github.com/99designs/keyring v1.2.2 // indirect
 	github.com/BurntSushi/toml v1.5.0 // indirect
-	github.com/CosmWasm/wasmd v0.61.5 // indirect
+	github.com/CosmWasm/wasmd v0.61.6 // indirect
 	github.com/CosmWasm/wasmvm/v3 v3.0.2 // indirect
 	github.com/DataDog/datadog-go v4.8.3+incompatible // indirect
 	github.com/DataDog/zstd v1.5.7 // indirect
@@ -199,6 +197,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/moby v27.5.1+incompatible // indirect
+	github.com/moby/sys/atomicwriter v0.1.0 // indirect
 	github.com/mtibben/percent v0.2.1 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/ncruces/go-strftime v1.0.0 // indirect
