@@ -25,6 +25,10 @@ The `tokenfactory` module allows any account to create a new token with the name
 
 - Osmosis Labs [TokenFactory](https://github.com/osmosis-labs/osmosis/tree/main/x/tokenfactory)
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.
+
 ## Installation
 
 This repository provides the `tokend` application, a simple command-line application that demonstrates the functionality of the `tokenfactory` module. To build and install the `tokend` application, run:

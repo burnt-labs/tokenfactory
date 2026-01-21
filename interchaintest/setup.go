@@ -4,9 +4,9 @@ import (
 	tokenfactorytypes "github.com/strangelove-ventures/tokenfactory/x/tokenfactory/types"
 
 	sdkmath "cosmossdk.io/math"
-	"github.com/strangelove-ventures/interchaintest/v8/chain/cosmos"
-	"github.com/strangelove-ventures/interchaintest/v8/chain/cosmos/wasm"
-	"github.com/strangelove-ventures/interchaintest/v8/ibc"
+	"github.com/cosmos/interchaintest/v10/chain/cosmos"
+	"github.com/cosmos/interchaintest/v10/chain/cosmos/wasm"
+	"github.com/cosmos/interchaintest/v10/ibc"
 
 	sdktestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
 )
@@ -45,7 +45,7 @@ var (
 			{
 				Repository: "tokenfactory",
 				Version:    "local",
-				UidGid:     "1025:1025",
+				UIDGID:     "1025:1025",
 			},
 		},
 		Bin:            "tokend",
