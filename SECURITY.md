@@ -25,8 +25,10 @@ request.
 
 We acknowledge receipt within **5 business days** and provide a triage decision
 within **14 days**. Active exploitation, or confirmed attacker awareness of an
-unpatched vulnerability, escalates the issue to Critical handling regardless of
-its original classification.
+unpatched vulnerability, escalates the issue to Critical response handling —
+prioritization, coordination, and disclosure timeline — regardless of its
+original classification. That escalation does not change the severity
+assessment of the finding or its reward eligibility.
 
 ## Fork Scope
 
@@ -34,17 +36,22 @@ This fork ships on mainnet under `-xion.N` version tags, consumed by
 [`burnt-labs/xion`](https://github.com/burnt-labs/xion) through a `replace`
 directive in its `go.mod`.
 
-**Only the delta between the fork and its upstream base is in scope.**
-Determine the upstream base from the version tag — `v0.53.4-xion.2` is based
-on upstream `v0.53.4` — and diff against it. A finding that reproduces on the
-unmodified upstream tag belongs to the upstream project, not to this program,
-and is not eligible here regardless of its impact on XION.
+**Only the delta between the fork and its upstream base is in scope.** This
+fork's version tags do not correspond to upstream release tags — determine the
+upstream base as the merge base between the fork tag and upstream `main`
+(`git merge-base <fork-tag> upstream/main`). For the current `v0.53.4-xion.N`
+tags that base is upstream `v0.50.7-wasmvm2` (commit `dacc993`); diff against
+it. A finding that reproduces on the unmodified upstream base belongs to the
+upstream project, not to this program, and is not eligible here regardless of
+its impact on XION.
 
 Scope applies to the current mainnet release. Findings affecting only
 deprecated or end-of-life versions, or already remediated in the currently
 deployed mainnet version, are not eligible regardless of whether the fix was
 publicly announced. Verify exploitability against the currently deployed
-version before submitting.
+version before submitting. The currently deployed version is recorded in
+[`burnt-labs/xion-mainnet-1`](https://github.com/burnt-labs/xion-mainnet-1),
+the network's reference configuration.
 
 ## Severity
 
@@ -74,8 +81,10 @@ The proof of concept should run against a **locally running XION node
 configured with mainnet parameters** — with the XION ante handler chain,
 module set, and governance configuration matching mainnet — and execute the
 attack via standard transaction broadcast (`BroadcastTxSync` or equivalent)
-against that node. Simulated environments that model chain state without
-running a full node do not demonstrate exploitability.
+against that node. Broadcast acceptance alone is not sufficient: demonstrate
+inclusion in a block and the resulting state change or impact. Simulated
+environments that model chain state without running a full node do not
+demonstrate exploitability.
 
 ## Permissioned Chain Policy
 
@@ -140,5 +149,6 @@ necessary to confirm the finding, do not access or disclose user data, and do
 not disrupt production systems.
 
 Authorization to actively test extends only to local environments and
-infrastructure you control. Reporting a vulnerability you encountered
-incidentally is always welcome.
+infrastructure you control. Testing against production systems — including
+XION mainnet — is not authorized under this policy. Reporting a vulnerability
+you encountered incidentally is always welcome.
