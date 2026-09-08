@@ -57,13 +57,13 @@ jobs:
       fail-fast: false
 
     steps:
+      - name: checkout chain
+        uses: actions/checkout@v4
+
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version-file: go.mod
-
-      - name: checkout chain
-        uses: actions/checkout@v4
+          go-version-file: interchaintest/go.mod
 
       - name: Download Tarball Artifact
         uses: actions/download-artifact@v4
