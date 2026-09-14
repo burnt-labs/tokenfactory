@@ -34,8 +34,8 @@ func (m Migrator) Migrate1to2(ctx sdk.Context) error {
 	defer iter.Close()
 	for ; iter.Valid(); iter.Next() {
 		denom := string(iter.Value())
-		denomMetadata, err := m.keeper.bankKeeper.GetDenomMetaData(ctx, denom)
-		if err {
+		denomMetadata, found := m.keeper.bankKeeper.GetDenomMetaData(ctx, denom)
+		if !found {
 			panic(fmt.Errorf("denom %s does not exist", denom))
 		}
 
