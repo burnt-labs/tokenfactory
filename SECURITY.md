@@ -95,10 +95,17 @@ technical validity.
 
 ## Privileged Actor Policy
 
-Attacks requiring a privileged party — governance, a module authority, or a
-validator — to take self-destructive or colluding action are classified at
-**Medium at most**, regardless of downstream impact. The threat model assumes
-privileged actors operate within the specified protocol parameters.
+Findings are classified at **Medium at most** when the attack must begin with
+control of governance, a module authority, validator or operator credentials,
+or another privileged role — or requires that holder to cooperate — and the
+demonstrated action is already within that role's intended authority.
+
+The cap does not apply when a flaw lets an attacker who starts without that
+privilege obtain it or bypass its authorization check, or lets a legitimately
+held limited role perform actions outside its intended permissions. Those
+findings are assessed by demonstrated impact. This policy does not authorize
+researchers to acquire or exercise production privileges they do not
+legitimately control, or to test with production privileges they do control.
 
 ## Out of Scope
 
