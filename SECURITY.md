@@ -32,18 +32,19 @@ assessment of the finding or its reward eligibility.
 
 ## Fork Scope
 
-This fork ships on mainnet under `-xion.N` version tags, consumed by
-[`burnt-labs/xion`](https://github.com/burnt-labs/xion) through a `replace`
-directive in its `go.mod`.
+The current mainnet release consumes `v0.53.4-xion.3` through a `replace`
+directive in [`burnt-labs/xion`](https://github.com/burnt-labs/xion)'s
+`go.mod`.
 
 **Only the delta between the fork and its upstream base is in scope.** This
 fork's version tags do not correspond to upstream release tags — determine the
 upstream base as the merge base between the fork tag and upstream `main`
-(`git merge-base <fork-tag> upstream/main`). For the current `v0.53.4-xion.N`
-tags that base is upstream `v0.50.7-wasmvm2` (commit `dacc993`); diff against
-it. A finding that reproduces on the unmodified upstream base belongs to the
-upstream project, not to this program, and is not eligible here regardless of
-its impact on XION.
+(`git merge-base <fork-tag> upstream/main`). For the current
+`v0.53.4-xion.3` tag that base is upstream `v0.50.7-wasmvm2` (commit
+`dacc99329b029248b965dcb025c869bc5cd7296d`); diff against it. A finding that
+reproduces on the unmodified upstream base belongs to the upstream project,
+not to this program, and is not eligible here regardless of its impact on
+XION.
 
 Scope applies to the current mainnet release. Findings affecting only
 deprecated or end-of-life versions, or already remediated in the currently
@@ -59,7 +60,7 @@ the network's reference configuration.
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **CRITICAL** | Direct, permanent, irrecoverable theft or loss of user funds at protocol scale. Unauthorized minting. Chain halt or consensus failure requiring a hard fork to resolve                                                                          |
 | **HIGH**     | Theft or freezing of user funds affecting individual accounts. Significant authentication bypass with demonstrated exploitability                                                                                                              |
-| **MEDIUM**   | Limited fund loss or temporary disruption requiring specific preconditions. Attacks requiring privileged-party cooperation                                                                                                                     |
+| **MEDIUM**   | Limited fund loss or temporary disruption requiring specific preconditions. Privileged-party cooperation where the demonstrated impact uses authority the role already has (see Privileged Actor Policy) |
 | **LOW**      | Valid, reproducible code-level issue with no direct risk to funds or chain safety, representing a meaningful hardening opportunity. Must include a specific code reference                                                                      |
 
 Only **High** and **Critical** findings are reward eligible. Collecting a
@@ -84,21 +85,36 @@ attack via standard transaction broadcast (`BroadcastTxSync` or equivalent)
 against that node. Broadcast acceptance alone is not sufficient: demonstrate
 inclusion in a block and the resulting state change or impact. Simulated
 environments that model chain state without running a full node do not
-demonstrate exploitability.
+demonstrate exploitability. For chain-halt or consensus-failure findings,
+instead show the triggering transaction or input sequence, the height or round
+at which progress stops or diverges, and the observed halt or failure condition;
+block inclusion and successful execution are not required when the failure
+prevents them.
 
 ## Permissioned Chain Policy
 
-XION mainnet operates with `code_upload_access: Nobody`. Contract deployment
-requires a governance proposal. Any attack vector requiring an attacker to
-deploy a malicious contract on mainnet is out of scope, regardless of
-technical validity.
+XION mainnet operates with `code_upload_access: Nobody`. Uploading new contract
+code requires governance approval. An attack against this repository that
+depends on uploading new attacker-controlled contract code to mainnet is out of
+scope. A finding against the tokenfactory module that is exploitable through
+code already approved for mainnet is not excluded by this rule, including when
+the proof of concept instantiates or controls a new contract from an approved
+code ID.
 
 ## Privileged Actor Policy
 
-Attacks requiring a privileged party — governance, a module authority, or a
-validator — to take self-destructive or colluding action are classified at
-**Medium at most**, regardless of downstream impact. The threat model assumes
-privileged actors operate within the specified protocol parameters.
+Findings are classified at **Medium at most** when the attack must begin with
+control of governance, a module authority, validator or operator credentials,
+or another privileged role — or requires that holder to cooperate — and the
+demonstrated impact depends on that holder acting self-destructively, outside
+normal operation, or in collusion while using authority the role already has.
+
+The cap does not apply when a flaw lets an attacker who starts without that
+privilege obtain it or bypass its authorization check, or lets a legitimately
+held limited role exercise authority that role was not granted. Those
+findings are assessed by demonstrated impact. This policy does not authorize
+researchers to acquire or exercise production privileges they do not
+legitimately control, or to test with production privileges they do control.
 
 ## Out of Scope
 
@@ -117,7 +133,8 @@ privileged actors operate within the specified protocol parameters.
 
 **Vulnerability classes**
 
-- Attacks requiring malicious contract deployment on mainnet
+- Attacks against this repository requiring new attacker-controlled contract
+  code to be uploaded to mainnet
 - Denial of service of any form, including single-transaction resource
   exhaustion, node crashes, and chain halts recoverable via a software patch,
   coordinated validator restart, or governance parameter update. Chain halts
