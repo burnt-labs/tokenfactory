@@ -94,11 +94,12 @@ prevents them.
 ## Permissioned Chain Policy
 
 XION mainnet operates with `code_upload_access: Nobody`. Uploading new contract
-code requires governance approval. An attack that depends on uploading
-attacker-controlled contract code to mainnet is out of scope. A finding that is
-exploitable through code already approved for mainnet is not excluded by this
-rule, including when the proof of concept instantiates or controls a new
-contract from an approved code ID.
+code requires governance approval. An attack against this repository that
+depends on uploading new attacker-controlled contract code to mainnet is out of
+scope. A finding against the tokenfactory module that is exploitable through
+code already approved for mainnet is not excluded by this rule, including when
+the proof of concept instantiates or controls a new contract from an approved
+code ID.
 
 ## Privileged Actor Policy
 
@@ -132,8 +133,8 @@ legitimately control, or to test with production privileges they do control.
 
 **Vulnerability classes**
 
-- Attacks requiring new attacker-controlled contract code to be uploaded to
-  mainnet
+- Attacks against this repository requiring new attacker-controlled contract
+  code to be uploaded to mainnet
 - Denial of service of any form, including single-transaction resource
   exhaustion, node crashes, and chain halts recoverable via a software patch,
   coordinated validator restart, or governance parameter update. Chain halts
