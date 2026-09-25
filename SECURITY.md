@@ -32,18 +32,19 @@ assessment of the finding or its reward eligibility.
 
 ## Fork Scope
 
-This fork ships on mainnet under `-xion.N` version tags, consumed by
-[`burnt-labs/xion`](https://github.com/burnt-labs/xion) through a `replace`
-directive in its `go.mod`.
+The current mainnet release consumes `v0.53.4-xion.3` through a `replace`
+directive in [`burnt-labs/xion`](https://github.com/burnt-labs/xion)'s
+`go.mod`.
 
 **Only the delta between the fork and its upstream base is in scope.** This
 fork's version tags do not correspond to upstream release tags — determine the
 upstream base as the merge base between the fork tag and upstream `main`
-(`git merge-base <fork-tag> upstream/main`). For the current `v0.53.4-xion.N`
-tags that base is upstream `v0.50.7-wasmvm2` (commit `dacc993`); diff against
-it. A finding that reproduces on the unmodified upstream base belongs to the
-upstream project, not to this program, and is not eligible here regardless of
-its impact on XION.
+(`git merge-base <fork-tag> upstream/main`). For the current
+`v0.53.4-xion.3` tag that base is upstream `v0.50.7-wasmvm2` (commit
+`dacc99329b029248b965dcb025c869bc5cd7296d`); diff against it. A finding that
+reproduces on the unmodified upstream base belongs to the upstream project,
+not to this program, and is not eligible here regardless of its impact on
+XION.
 
 Scope applies to the current mainnet release. Findings affecting only
 deprecated or end-of-life versions, or already remediated in the currently
