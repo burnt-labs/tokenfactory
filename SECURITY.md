@@ -59,7 +59,7 @@ the network's reference configuration.
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **CRITICAL** | Direct, permanent, irrecoverable theft or loss of user funds at protocol scale. Unauthorized minting. Chain halt or consensus failure requiring a hard fork to resolve                                                                          |
 | **HIGH**     | Theft or freezing of user funds affecting individual accounts. Significant authentication bypass with demonstrated exploitability                                                                                                              |
-| **MEDIUM**   | Limited fund loss or temporary disruption requiring specific preconditions. Attacks requiring privileged-party cooperation                                                                                                                     |
+| **MEDIUM**   | Limited fund loss or temporary disruption requiring specific preconditions. Privileged-party cooperation where the demonstrated impact uses authority the role already has (see Privileged Actor Policy) |
 | **LOW**      | Valid, reproducible code-level issue with no direct risk to funds or chain safety, representing a meaningful hardening opportunity. Must include a specific code reference                                                                      |
 
 Only **High** and **Critical** findings are reward eligible. Collecting a
@@ -84,7 +84,11 @@ attack via standard transaction broadcast (`BroadcastTxSync` or equivalent)
 against that node. Broadcast acceptance alone is not sufficient: demonstrate
 inclusion in a block and the resulting state change or impact. Simulated
 environments that model chain state without running a full node do not
-demonstrate exploitability.
+demonstrate exploitability. For chain-halt or consensus-failure findings,
+instead show the triggering transaction or input sequence, the height or round
+at which progress stops or diverges, and the observed halt or failure condition;
+block inclusion and successful execution are not required when the failure
+prevents them.
 
 ## Permissioned Chain Policy
 
