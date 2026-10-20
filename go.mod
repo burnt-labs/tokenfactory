@@ -3,7 +3,8 @@ module github.com/strangelove-ventures/tokenfactory
 go 1.26.5
 
 replace (
-	github.com/CosmWasm/wasmd => ../wasmd
+	// xion wasmd fork on Cosmos SDK v0.55
+	github.com/CosmWasm/wasmd => github.com/burnt-labs/wasmd v0.70.4-xion.2
 	// Force compatible collections version
 	github.com/spf13/viper => github.com/spf13/viper v1.17.0 // v1.18+ breaks app overrides
 	// Downgraded to avoid bugs in following commits which caused simulations to fail.
@@ -11,7 +12,6 @@ replace (
 )
 
 require (
-	cosmossdk.io/client/v2 v2.11.0
 	cosmossdk.io/errors v1.1.0
 	cosmossdk.io/log/v2 v2.1.0
 	cosmossdk.io/math v1.5.3
