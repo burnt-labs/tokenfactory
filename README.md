@@ -1,5 +1,7 @@
 # Token Factory
 
+The Xion fork is a library for Cosmos SDK v0.55.0 and wasmd v0.70.4 with wasmvm v3. The standalone application, app-backed tests and simulation hooks are removed. Existing chains must already be at tokenfactory consensus version 2; the legacy params migration is no longer registered.
+
 [Audited](https://hashlock.com/wp-content/uploads/2024/11/Manifest-Token-Factory-Smart-Contract-Audit-Report-Revised-Report-v2.pdf) by [HashLock](https://hashlock.com/audits/manifest) (November 2024)
 
 </br>
@@ -25,32 +27,13 @@ The `tokenfactory` module allows any account to create a new token with the name
 
 - Osmosis Labs [TokenFactory](https://github.com/osmosis-labs/osmosis/tree/main/x/tokenfactory)
 
-## Installation
+## Integration
 
-This repository provides the `tokend` application, a simple command-line application that demonstrates the functionality of the `tokenfactory` module. To build and install the `tokend` application, run:
-
-```bash
-make install
-```
-
-The application can be run with the following command:
-
-```bash
-tokend
-```
-
-## Test Node
-
-To run a test node with the `tokenfactory` module, run:
-
-```bash
-make install
-CHAIN_ID="local-1" HOME_DIR="~/.tokenfactory" TIMEOUT_COMMIT="500ms" CLEAN=true sh scripts/test_node.sh
-```
+Import `x/tokenfactory` and its `keeper`, `types` and `bindings` packages from the integrating chain. This fork does not build a standalone node.
 
 ## Usage
 
-The `tokend` application provides the following `tokenfactory` transactions:
+The integrating chain exposes the following `tokenfactory` transactions:
 
 - `create-denom`: Create a new denom with the name `factory/{creator address}/{subdenom}`.
 - `mint`: Mint tokens to your address. You must be the admin of the denom to mint tokens.
@@ -70,50 +53,17 @@ and the following queries:
 
 ## Testing
 
-To test the `tokenfactory` module, run:
+Run the remaining library unit tests:
 
 ```bash
-make test
+go test ./...
 ```
 
-To run the `tokenfactory` module's end-to-end tests, run:
-```bash
-make local-image
-make ictest-tokenfactory
-```
-
-## Coverage
-
-To generate the coverage report of the `tokenfactory` module, run:
-
-```bash
-make local-image
-make coverage
-```
-
-## Simulation
-
-To run the `tokenfactory` module's full application simulation tests, run:
-
-```bash
-make sim-full-app
-```
-
-To run the `tokenfactory` simulation after state import test, run:
-
-```bash
-make sim-after-import
-```
-
-To run the `tokenfactory` application determinism simulation, run:
-
-```bash
-make sim-app-determinism
-```
-
-Append `-random` to the end of the commands above to run the simulation with a random seed, e.g., `make sim-full-app-random`.
+Runtime coverage is provided by Xion's tokenfactory end-to-end tests. Application simulations are not supported by this fork.
 
 ## Examples
+
+The examples use `tokend` as the integrating chain's binary name; substitute your chain binary.
 
 ### Create Denom
 

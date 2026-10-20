@@ -17,9 +17,7 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/spf13/cobra"
 	"github.com/strangelove-ventures/tokenfactory/x/tokenfactory/client/cli"
-	"github.com/strangelove-ventures/tokenfactory/x/tokenfactory/exported"
 	"github.com/strangelove-ventures/tokenfactory/x/tokenfactory/keeper"
-	simulation "github.com/strangelove-ventures/tokenfactory/x/tokenfactory/simulation"
 	"github.com/strangelove-ventures/tokenfactory/x/tokenfactory/types"
 
 	abci "github.com/cometbft/cometbft/abci/types"
@@ -29,7 +27,6 @@ import (
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 )
 
 var (
@@ -110,8 +107,6 @@ type AppModule struct {
 	keeper        keeper.Keeper
 	accountKeeper types.AccountKeeper
 	bankKeeper    types.BankKeeper
-
-	legacySubspace exported.Subspace
 }
 
 // IsAppModule implements module.AppModule.
@@ -124,16 +119,12 @@ func NewAppModule(
 	keeper keeper.Keeper,
 	accountKeeper types.AccountKeeper,
 	bankKeeper types.BankKeeper,
-
-	// legacySubspace is used solely for migration of x/params managed parameters
-	legacySubspace exported.Subspace,
 ) AppModule {
 	return AppModule{
 		AppModuleBasic: NewAppModuleBasic(),
 		keeper:         keeper,
 		accountKeeper:  accountKeeper,
 		bankKeeper:     bankKeeper,
-		legacySubspace: legacySubspace,
 	}
 }
 
@@ -150,11 +141,6 @@ func (AppModule) QuerierRoute() string { return types.QuerierRoute }
 func (am AppModule) RegisterServices(cfg module.Configurator) {
 	types.RegisterMsgServer(cfg.MsgServer(), keeper.NewMsgServerImpl(am.keeper))
 	types.RegisterQueryServer(cfg.QueryServer(), am.keeper)
-
-	m := keeper.NewMigrator(am.keeper, am.legacySubspace)
-	if err := cfg.RegisterMigration(types.ModuleName, 1, m.Migrate1to2); err != nil {
-		panic(fmt.Sprintf("failed to migrate x/%s from version 1 to 2: %v", types.ModuleName, err))
-	}
 }
 
 // RegisterInvariants registers the x/tokenfactory module's invariants.
@@ -181,25 +167,4 @@ func (am AppModule) ExportGenesis(ctx sdk.Context, cdc codec.JSONCodec) json.Raw
 // ConsensusVersion implements ConsensusVersion.
 func (AppModule) ConsensusVersion() uint64 {
 	return ConsensusVersion
-}
-
-// ____________________________________________________________________________
-
-// AppModuleSimulation functions
-func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
-	simulation.RandomizedGenState(simState)
-}
-
-// GenerateGenesisState creates a randomized GenState of the bank module.
-func (am AppModule) ProposalContents(_ module.SimulationState) []simtypes.WeightedProposalMsg {
-	return nil
-}
-
-// RegisterStoreDecoder registers a decoder for supply module's types
-func (am AppModule) RegisterStoreDecoder(_ simtypes.StoreDecoderRegistry) {
-}
-
-// WeightedOperations returns the all the gov module operations with their respective weights.
-func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
-	return simulation.WeightedOperations(&simState, am.keeper, am.accountKeeper, am.bankKeeper)
 }
